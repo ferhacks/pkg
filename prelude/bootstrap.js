@@ -1914,6 +1914,11 @@ function payloadFileSync(pointer) {
         displayErrors: true,
         cachedData: payloadFileSync(entityBlob),
         sourceless: !entityContent,
+        importModuleDynamically: async (specifier, _, importAssertions) => {
+        const loader = asyncESM.esmLoader;
+        return loader.import(specifier, normalizeReferrerURL(filename),
+                             importAssertions);
+      },
       };
 
       const code = entityContent
